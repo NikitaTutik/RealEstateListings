@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ['real-estate-listingsapi.onrender.com',"127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -176,7 +176,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000/", "https://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["real-estate-listingsapi.onrender.com","http://127.0.0.1:8000/", "https://127.0.0.1"]
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

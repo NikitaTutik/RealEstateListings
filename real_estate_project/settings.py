@@ -73,7 +73,8 @@ WSGI_APPLICATION = "real_estate_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+DATABASES = {"default": dj_database_url.parse(os.environ.get("prodDB"))}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -175,7 +176,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["https://real-estate-listingsapi.onrender.com","http://127.0.0.1:8000/", "https://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["real-estate-listingsapi.onrender.com","http://127.0.0.1:8000/", "https://127.0.0.1"]
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -15,7 +15,6 @@ class PropertyListCreateView(generics.ListCreateAPIView):
         else:
             return [AllowAny()]
 
-
 class PropertyRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer

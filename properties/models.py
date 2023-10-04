@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import CustomUser
+from .helpers import path_and_rename
 
 
 class Property(models.Model):
@@ -21,7 +22,7 @@ class PropertyImage(models.Model):
     property = models.ForeignKey(
         Property, on_delete=models.CASCADE, related_name="photos"
     )
-    photos = models.ImageField(upload_to="properties/")
+    photos = models.ImageField(upload_to=path_and_rename, max_length=255)
 
     def __str__(self) -> str:
         return "%s" % (self.property.title)

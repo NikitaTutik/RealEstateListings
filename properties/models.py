@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from users.models import CustomUser
 from .helpers import path_and_rename
 
@@ -19,10 +21,23 @@ class Property(models.Model):
 
 
 class PropertyImage(models.Model):
+    def validate_image(image):
+        file_size = image.file.size
+        limit_mb = 2
+        if file_size > limit_mb * 1024 * 1024:
+            raise ValidationError("Max size of an image is %s MB" % limit_mb)
+
     property = models.ForeignKey(
         Property, on_delete=models.CASCADE, related_name="photos"
     )
-    photos = models.ImageField(upload_to=path_and_rename, max_length=255)
+    photos = models.ImageField(
+        upload_to=path_and_rename,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["png", "jpeg", "jpg"]),
+            validate_image,
+        ],
+        max_length=255,
+    )
 
     def __str__(self) -> str:
         return "%s" % (self.property.title)

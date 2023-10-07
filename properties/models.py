@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.dispatch import receiver
 from users.models import CustomUser
 from .helpers import path_and_rename
 
@@ -41,3 +42,8 @@ class PropertyImage(models.Model):
 
     def __str__(self) -> str:
         return "%s" % (self.property.title)
+
+
+@receiver(models.signals.post_delete, sender=PropertyImage)
+def remove_file_from_s3(sender, instance, using, **kwargs):
+    instance.photos.delete(save=False)
